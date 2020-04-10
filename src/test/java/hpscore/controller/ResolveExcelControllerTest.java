@@ -42,7 +42,7 @@ public class ResolveExcelControllerTest {
     @Test
     @Transactional(rollbackFor = Exception.class) //开启事务，则自动回滚，数据库无变动（不加rollbackFor也一样）
     public void uploadTest() throws BusinessException {
-        File file=new File("./data/zuoping.xls");
+        File file=new File("./data/puchijun.jpg");
         try{
             String result=mvc.perform(
                     MockMvcRequestBuilders
@@ -50,7 +50,8 @@ public class ResolveExcelControllerTest {
                         .file(
                                 new MockMultipartFile("file","zuoping.xls",
                                         "multipart/form-data",new FileInputStream(file))
-                        )       //name：转换后的文件名称(但是不知何故只能写file) originalFilename：原文件名称 contentType：转换后文件类型 FileInputStream：文件输入流
+                        )       //name：转换后的文件名称(但是不知何故只能写file) originalFilename：原文件名称
+                                //contentType：转换后文件类型 FileInputStream：文件输入流
                         .session(session)
             ).andExpect(MockMvcResultMatchers.status().isOk())
              .andReturn().getResponse().getContentAsString();

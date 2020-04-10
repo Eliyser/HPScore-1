@@ -22,9 +22,8 @@ import java.util.regex.Pattern;
 @Service("resolveExcelServiceImpl")
 public class ResolveExcelServiceImpl implements ResolveExcelService {
     //打印日志
-    private  static final Logger logger = LoggerFactory.getLogger(ResolveExcelServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResolveExcelServiceImpl.class);
 
-    //注册url
     private static final String SUFFIX_2003=".xls";
     private static final String SUFFIX_2007=".xlsx";
 

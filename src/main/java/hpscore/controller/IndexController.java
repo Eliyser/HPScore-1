@@ -31,9 +31,6 @@ public class IndexController {
 
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-//    @Autowired
-//    private IndexService indexService;
-
     @RequestMapping("/index.html")
     public ModelAndView index(){
 
@@ -41,7 +38,7 @@ public class IndexController {
         List<FileInfo> fileInfoList = null;
         try {
             //读取当前目录下的Excel文件列表
-            fileInfoList = readFileInfo(".");
+            fileInfoList = readFileInfo("."); //引用FileUtil的readFileInfo方法
         } catch (IOException e) {
             e.printStackTrace();
         }

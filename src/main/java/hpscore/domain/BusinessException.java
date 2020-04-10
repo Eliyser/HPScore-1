@@ -12,6 +12,10 @@ public class BusinessException extends Exception {
         this.errCode = errCode;
         this.errMsg = errMsg;
     }
+    public BusinessException(int errCode,String errMsg,Throwable cause){
+        super(errMsg,cause);
+        this.errCode=errCode;
+    }
 
     public int getErrCode() {
         return errCode;

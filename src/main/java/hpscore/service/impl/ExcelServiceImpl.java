@@ -59,8 +59,10 @@ public class ExcelServiceImpl implements ExcelService {
         Workbook wb = new HSSFWorkbook();
         Map<String, CellStyle> styles = createStyles(wb);
         for (int i = 0; i < pingweiList.size(); i++) {
+            //创建Excel表格
             CreatePingweiScore(wb, styles, headers,pingweiList.get(i), model,year);
         }
+
         // Write the output to a file
         String file = excelName+".xls";
         FileOutputStream out = null;
@@ -100,9 +102,10 @@ public class ExcelServiceImpl implements ExcelService {
         String titleName = year+"泛珠赛全国总决赛终评评委打分审核表("+model+")";
         String pingweiName = "评委"+pid;
 
-        Sheet sheet = wb.createSheet(pingweiName);
+        //打印设置
+        Sheet sheet = wb.createSheet(pingweiName); //pingweiName为表名
         PrintSetup printSetup = sheet.getPrintSetup();
-        printSetup.setLandscape(true);
+        printSetup.setLandscape(true); //true表示页面方向为横向，false为纵向
         sheet.setFitToPage(true);
         sheet.setHorizontallyCenter(true);
 
@@ -112,15 +115,15 @@ public class ExcelServiceImpl implements ExcelService {
         Cell titleCell = titleRow.createCell(0);
         titleCell.setCellValue(titleName);
         titleCell.setCellStyle(styles.get("title"));
-        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$J$1"));
+        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$1:$J$1")); //从A1到J1单元格合并；可以直接CellRangeAddress（起始行，终止行，起始列，终止列）
 
         //Second row
         Row secondRow = sheet.createRow(1);
-        secondRow.setHeightInPoints(40);
+        secondRow.setHeightInPoints(40); //行高
         Cell secondCell = secondRow.createCell(0);
         secondCell.setCellValue("评委编号："+pid+"          评委签名：");
-        secondCell.setCellStyle(styles.get("header"));
-        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$J$2"));
+        secondCell.setCellStyle(styles.get("header")); //设置单元格样式
+        sheet.addMergedRegion(CellRangeAddress.valueOf("$A$2:$J$2")); //合并单元格，前面设置的样式都应用到了这些单元格上了
 
         //header row
         Row headerRow = sheet.createRow(2);
@@ -132,6 +135,7 @@ public class ExcelServiceImpl implements ExcelService {
             headerCell.setCellStyle(styles.get("header"));
         }
 
+        //评委分数
         int rownum = 3;
         for (int i = 0; i < pingweiScoreList.size(); i++) {
             Row row = sheet.createRow(rownum++);
@@ -152,12 +156,13 @@ public class ExcelServiceImpl implements ExcelService {
             }
         }
 
-        //finally set column widths, the width is measured in units of 1/256th of a character width
-        sheet.setColumnWidth(0, 10*256); //30 characters wide
-        sheet.setColumnWidth(1, 10*256); //30 characters wide
+        //所有行第1~3列的宽度，分别用来填写序号、作品编号和作品名称
+        sheet.setColumnWidth(0, 10*256); //10 characters wide
+        sheet.setColumnWidth(1, 10*256); //10 characters wide
         sheet.setColumnWidth(2, 30*256); //30 characters wide
+        //后面列的宽度
         for (int i = 3; i < headers.length; i++) {
-            sheet.setColumnWidth(i, 9*256); //30 characters wide
+            sheet.setColumnWidth(i, 9*256); //9 characters wide
         }
         return  0;
     }

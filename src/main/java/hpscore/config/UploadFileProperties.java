@@ -11,8 +11,6 @@ import javax.servlet.MultipartConfigElement;
  * @Author haien
  * @Description 对上传的文件做一些限制，extends WebMvcConfigurerAdapter
  * @Date 11:49 2018/7/26
- * @Param
- * @return
  **/
 @Configuration
 public class UploadFileProperties extends WebMvcConfigurerAdapter {
@@ -21,9 +19,9 @@ public class UploadFileProperties extends WebMvcConfigurerAdapter {
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory=new MultipartConfigFactory();
         //设置文件大小限制，超出会抛异常
-        factory.setMaxFileSize("10MB");  //KB/MB
+        factory.setMaxFileSize("10MB");  // KB/MB
         //设置总上传数据大小
-        factory.setMaxRequestSize("20MB");
+        factory.setMaxRequestSize("100MB"); // 上传多个文件
         return factory.createMultipartConfig();
     }
 }

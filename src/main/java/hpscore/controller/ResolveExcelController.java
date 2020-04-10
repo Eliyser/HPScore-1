@@ -36,7 +36,9 @@ public class ResolveExcelController {
      **/
     @RequestMapping(value="/upload",method=RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> uploadExcel(@RequestParam("file")MultipartFile file,@RequestParam("year")String year1,@RequestParam("cover")String cover) {
+    public Map<String,Object> uploadExcel(@RequestParam("file")MultipartFile file,
+                                          @RequestParam("year")String year1,
+                                          @RequestParam("cover")String cover) {
         int year = Integer.parseInt(year1);
         List<Works> works = worksRepository.findByYear(year);
         Map<String, Object> map = new HashMap<String, Object>();

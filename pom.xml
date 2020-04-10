@@ -69,6 +69,7 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--用途之一：借助ExceptionUtils类来获取异常的具体信息以记录到log文件-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

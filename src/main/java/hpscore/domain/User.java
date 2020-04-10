@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by ricardo on 2018/6/6.
@@ -15,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue
     private int id;
+    @Pattern(regexp = "^\\d{1,2}$")
     private String name;
     private String password;
     private int role;

@@ -3,7 +3,6 @@ package hpscore.controller;
 import hpscore.domain.User;
 import hpscore.repository.UserRepository;
 import hpscore.service.LogInfoService;
-import hpscore.tools.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +41,7 @@ public class LoginController {
      *@Date: 20:08 2018/7/13
      *@param: 
      **/
+    /*
     @RequestMapping(value = "/userlogin")
     @ResponseBody
     public Map<String,Object> login(HttpServletRequest request,
@@ -88,6 +89,28 @@ public class LoginController {
             map.put("result",0);
         }
         logInfoService.addLoginInfo(userName,ip,startTime, action, model);
+        return map;
+    }
+    */
+
+    /**
+     * @Author haien
+     * @Description 替代上面方法，用@Valid来验证，测试全局异常
+     * @Date 2018/9/12
+     * @Param
+     * @return
+     **/
+    @RequestMapping(value = "/userlogin")
+    @ResponseBody
+    public Map<String,Object> login(@Valid User user){ //自动封装
+        Map<String,Object> map =new HashMap<String,Object>();
+        User user1=userRepository.findByNameAndPassword(user.getName(),user.getPassword());
+        if(user!=null){
+            map.put("result",1);
+            map.put("role",user.getRole());
+        }else{
+            map.put("result",0);
+        }
         return map;
     }
 
