@@ -19,7 +19,7 @@ import javax.xml.bind.ValidationException;
 
 /**
  * @Author haien
- * @Description 全局异常，对多个异常进行处理（不过没跑过不知道起不起作用）
+ * @Description 全局异常，对多个异常进行处理
  * @Date 2018/9/12
  **/
 @ControllerAdvice
